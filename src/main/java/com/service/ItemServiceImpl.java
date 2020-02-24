@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class ItemServiceImpl implements ItemService {
     private ItemRepository itemRepository;
@@ -17,6 +19,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item save(Item item) {
+        if (item != null) {
+            item.setDateCreated(new Date());
+            item.setLastUpdatedDate(new Date());
+        }
         return itemRepository.save(item);
     }
 

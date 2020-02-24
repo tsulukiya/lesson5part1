@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.model.Item;
 import com.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 @Controller
 public class ItemController {
     @Autowired
     private ItemService itemService;
 
     @RequestMapping(method = RequestMethod.POST, value = "saveItem", produces = "application/json")
-    public @ResponseBody Item save(String name, String description) {
-        Item item = new Item();
-        item.setName(name);
-        item.setDescription(description);
+    public @ResponseBody Item save(Item item) {
         return itemService.save(item);
     }
 

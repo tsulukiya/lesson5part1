@@ -1,20 +1,23 @@
 package com.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import oracle.sql.DATE;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ITEM")
 public class Item {
+   // @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
+    //@JsonProperty("name")
     private String name;
+    //@JsonProperty("dateCreated")
     private Date dateCreated;
+    //@JsonProperty("lastUpdatedDate")
     private Date lastUpdatedDate;
-    @JsonProperty("description")
+    //@JsonProperty("description")
     private String description;
 
     public Item() {
@@ -95,12 +98,30 @@ public class Item {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        Item item = (Item) o;
+        return Objects.equals(id, item.id) &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(dateCreated, item.dateCreated) &&
+                Objects.equals(lastUpdatedDate, item.lastUpdatedDate) &&
+                Objects.equals(description, item.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, dateCreated, lastUpdatedDate, description);
+    }
+
+    @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", dateCreated=" + dateCreated +
                 ", lastUpdatedDate=" + lastUpdatedDate +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
