@@ -6,6 +6,7 @@ import com.service.ItemServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -45,10 +46,10 @@ public class AppConfig {
         return dataSource;
     }
 
-//    @Bean
-//    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-//        return new PersistenceExceptionTranslationPostProcessor();
-//    }
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
